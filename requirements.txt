@@ -1,0 +1,9 @@
+yfinance
+pandas
+numpy
+matplotlib
+lxml
+jax
+jaxlib
+scikit-learn
+seaborn
