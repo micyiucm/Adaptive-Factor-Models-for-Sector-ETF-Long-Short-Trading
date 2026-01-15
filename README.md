@@ -1,6 +1,6 @@
 # Dynamic Factor Arbitrage: Isolating Residual Momentum in Sector ETFs
 
-A quantitative finance research project that explores **statistical arbitrage** in U.S. equity sector ETFs by extracting tradable signals from factor model residuals. This project compares static PCA decomposition against an adaptive **Bayesian state-space model** to capture time-varying factor exposures, with rigorous walk-forward validation to prevent lookahead bias.
+This is a quantitative finance research project that explores **statistical arbitrage** in U.S. equity sector ETFs by extracting tradable signals from factor model residuals. We compare static PCA decomposition against an adaptive **Bayesian state-space model** to capture time-varying factor exposures. The models are evaluated using a walk-forward validation approach.
 
 ---
 
@@ -8,7 +8,7 @@ A quantitative finance research project that explores **statistical arbitrage** 
 
 Traditional factor models assume static betas (factor loadings), but real markets exhibit **regime changes** where these relationships evolve over time. This project investigates whether adaptive residual extraction using Kalman filtering can generate superior trading signals compared to static PCA approaches.
 
-### Key Research Questions
+### Key Research Questions:
 1. Can a low-rank factor model ($k=3$) sufficiently explain common variance in sector ETFs?
 2. Do factor model residuals exhibit momentum or mean-reversion characteristics?
 3. Does dynamic beta estimation via Kalman filtering improve signal quality?
@@ -20,7 +20,7 @@ Traditional factor models assume static betas (factor loadings), but real market
 | Fixed PCA (Momentum) | -0.03 | -5.2% | -48.8% |
 | Rolling PCA (Mean Reversion) | -0.85 | -81.7% | -82.7% |
 
-The Kalman-filtered momentum strategy significantly outperforms static approaches, suggesting that **residual persistence** (momentum) rather than mean-reversion drives alpha in the cross-section of sector ETFs.
+The Bayesian state-space momentum strategy significantly outperforms static approaches, suggesting that **residual persistence** (momentum) rather than mean-reversion drives alpha in the cross-section of sector ETFs.
 
 ---
 
@@ -78,9 +78,11 @@ The Kalman filter enables **time-varying beta estimation**, modeling factor load
 #### State-Space Representation
 
 **State Equation** (beta evolution):
+
 $$\boldsymbol{\beta}_t = \boldsymbol{\beta}_{t-1} + \boldsymbol{\omega}_t, \quad \boldsymbol{\omega}_t \sim \mathcal{N}(\mathbf{0}, \delta \mathbf{I})$$
 
 **Observation Equation** (return generation):
+
 $$r_t = \mathbf{f}_t^\top \boldsymbol{\beta}_t + v_t, \quad v_t \sim \mathcal{N}(0, v_e)$$
 
 Where:
@@ -92,14 +94,21 @@ Where:
 #### Kalman Filter Recursion
 
 **Prediction Step**:
+
 $$\hat{\boldsymbol{\beta}}_{t|t-1} = \hat{\boldsymbol{\beta}}_{t-1|t-1}$$
+
 $$\mathbf{P}_{t|t-1} = \mathbf{P}_{t-1|t-1} + \delta \mathbf{I}$$
 
 **Update Step**:
+
 $$e_t = r_t - \mathbf{f}_t^\top \hat{\boldsymbol{\beta}}_{t|t-1} \quad \text{(innovation/residual)}$$
+
 $$Q_t = \mathbf{f}_t^\top \mathbf{P}_{t|t-1} \mathbf{f}_t + v_e \quad \text{(innovation variance)}$$
+
 $$\mathbf{K}_t = \frac{\mathbf{P}_{t|t-1} \mathbf{f}_t}{Q_t} \quad \text{(Kalman gain)}$$
+
 $$\hat{\boldsymbol{\beta}}_{t|t} = \hat{\boldsymbol{\beta}}_{t|t-1} + \mathbf{K}_t e_t \quad \text{(updated state)}$$
+
 $$\mathbf{P}_{t|t} = \mathbf{P}_{t|t-1} - \mathbf{K}_t \mathbf{f}_t^\top \mathbf{P}_{t|t-1} \quad \text{(updated covariance)}$$
 
 The **innovation** $e_t$ serves as the trading signal—representing the component of returns unexplained by the adaptive factor model.
