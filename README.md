@@ -1,7 +1,7 @@
 # Dynamic Factor Arbitrage: Isolating Residual Momentum in Sector ETFs
 
 ![Python](https://img.shields.io/badge/Python-3.12%2B-blue)
-![JAX](https://img.shields.io/badge/JAX-Accelerated-green)
+![JAX](https://img.shields.io/badge/JAX-green)
 ![License](https://img.shields.io/badge/License-MIT-purple)
 
 
