@@ -39,6 +39,16 @@ Backtest engine:
 > Notes:
 > - VaR/ES here correspond to 1-day Value-at-Risk/Expected Shortfall at the 95% confidence interval.
 
+### Cumulative wealth under different strategies
+
+![Cumulative wealth under different strategies](figures/wealth_curves.png)
+
+This graph shows the cumulative wealth from a 10-fold walk-forward test (train 3 years, trade the next 1 year) under different strategies (see legend), with each test year chained together into a single out-of-sample equity curve. 
+
+- **Mean-reversion outperforms momentum**: Both mean-reversion variants finish above their momentum counterparts across most of the sample.
+- **Best-performing model**: Kalman Filtering with fixed PCA factors, mean-reversion delivers the strongest out-of-sample equity curve, finishing around +15–16%.
+- **Rolling PCA underperforms**: Rolling PCA is less stable and ends worse than fixed PCA, suggesting frequent re-estimation hurts in this small ETF universe.
+- **Regime-dependent edge**: Most of the performance separation appears post-2019; earlier years are flatter and closer together.
 ---
 
 ## Quickstart
