@@ -18,7 +18,7 @@ def download_etf_data(start_date: str = "2015-01-01",
     Parameters:
         start_date (str): a string of the start date of the dataset
         end_date (str): a string of the end date of the dataset
-    Output: A pandas DataFrame of adjusted close prices of liquid ETFs
+    Returns: A pandas DataFrame of adjusted close prices of liquid ETFs
     """
     tickers = get_liquid_etfs()
     
@@ -52,7 +52,7 @@ def calculate_log_returns(prices: pd.DataFrame) -> pd.DataFrame:
     Function to calculate log returns from simple returns
     Parameters:
         prices (pd.DataFrame): A pandas DataFrame containing adjusted close prices
-    Output: A pandas DataFrame containing log_returns instead of prices
+    Returns: A pandas DataFrame containing log_returns instead of prices
     Math:
         log returns at time t r_t = log(P_t/P_{t-1}) = log(P_t)-log(P_{t-1})
     """
@@ -69,7 +69,7 @@ def generate_walk_forward_validation_split(returns: pd.DataFrame,
         returns (pd.DataFrame): DataFrame of log returns with DateTime Index.
         train_years (int, optional): Number of years in each training window.
         test_years (int, optional): Number of years in each testing window.
-    Output: A pandas DataFrame containing splitted data with columns:
+    Returns: A pandas DataFrame containing splitted data with columns:
         Fold (int): Fold identifier, 1-indexed
         Train_Start (Timestamp): First trading day in training period
         Train_End (Timestamp): Last trading day in training period
