@@ -5,6 +5,7 @@ __pycache__/
 
 # Local data and outputs
 /data/
+/figures/
 
 # Local virtual environments
 /statarb/
