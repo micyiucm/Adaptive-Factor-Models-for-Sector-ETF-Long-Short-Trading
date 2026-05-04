@@ -92,14 +92,8 @@ pip install -r requirements.txt
 python src/data_loader.py
 ```
 
-2. Generate PCA residuals
+2. Run walk-forward validation for all strategies (computes residuals, signals, and backtests)
 
 ```bash
-python src/static_pca.py
-```
-
-3. Run walk-forward validation for all strategies
-
-```bash
-python src/run_walk_forward.py
+python -m src
 ```
